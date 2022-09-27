@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model interacoes {
+  id_interacao   BigInt   @id(map: "interacoes_pk") @default(autoincrement())
+  tipo           BigInt
+  comentario     String   @db.VarChar
+  data_interacao DateTime @db.Timestamp(6)
+  id_usuario     BigInt
+  id_poema       BigInt
+  poema          poema    @relation(fields: [id_poema], references: [id_poema], onDelete: NoAction, onUpdate: NoAction, map: "id_poema")
+  usuario        usuario  @relation(fields: [id_usuario], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction, map: "id_usuario")
+}
+
+model usuario {
+  id_usuario    BigInt       @id(map: "id_usuario") @default(autoincrement())
+  nome          String       @db.VarChar
+  senha         String       @db.VarChar
+  email         String       @db.VarChar
+  data_cadastro DateTime     @db.Timestamp(6)
+  telefone      String       @db.VarChar
+  assinatura    String       @db.VarChar
+  autoria       autoria[]
+  interacoes    interacoes[]
+}
+
+model autoria {
+  id_autoria BigInt  @id(map: "autoria_pk") @default(autoincrement())
+  id_usuario BigInt
+  id_poema   BigInt
+  poema      poema   @relation(fields: [id_poema], references: [id_poema], onDelete: NoAction, onUpdate: NoAction, map: "id_poema")
+  usuario    usuario @relation(fields: [id_usuario], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction, map: "id_usuario")
+}
+
+model poema {
+  id_poema        BigInt       @id(map: "poema_pk") @default(autoincrement())
+  titulo          String?      @db.VarChar
+  privado         BigInt
+  data_publicacao DateTime     @db.Timestamp(6)
+  tema            String?      @db.VarChar
+  texto           String       @db.VarChar
+  autoria         autoria[]
+  interacoes      interacoes[]
+}
