@@ -9,7 +9,7 @@ const poemaController = new PoemaController()
 const poemaServices = new PoemServices()
 
 router.get("/", (req: Request, res: Response)=>{
-    return res.status(200).json({msg: "Olá"})
+    return res.send("Olá")
 })
 
 router.get("/user/find", userController.controllerGetUser);
