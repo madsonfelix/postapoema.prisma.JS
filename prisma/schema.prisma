@@ -8,18 +8,18 @@ datasource db {
 }
 
 model interacoes {
-  id_interacao   BigInt   @id(map: "interacoes_pk") @default(autoincrement())
-  tipo           BigInt
+  id_interacao   Int      @id(map: "interacoes_pk")
+  tipo           Int
   comentario     String   @db.VarChar
   data_interacao DateTime @db.Timestamp(6)
-  id_usuario     BigInt
-  id_poema       BigInt
+  id_usuario     Int
+  id_poema       Int
   poema          poema    @relation(fields: [id_poema], references: [id_poema], onDelete: NoAction, onUpdate: NoAction, map: "id_poema")
   usuario        usuario  @relation(fields: [id_usuario], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction, map: "id_usuario")
 }
 
 model usuario {
-  id_usuario    BigInt       @id(map: "id_usuario") @default(autoincrement())
+  id_usuario    Int          @id(map: "id_usuario")
   nome          String       @db.VarChar
   senha         String       @db.VarChar
   email         String       @db.VarChar
@@ -31,17 +31,17 @@ model usuario {
 }
 
 model autoria {
-  id_autoria BigInt  @id(map: "autoria_pk") @default(autoincrement())
-  id_usuario BigInt
-  id_poema   BigInt
+  id_autoria Int     @id(map: "autoria_pk")
+  id_usuario Int
+  id_poema   Int
   poema      poema   @relation(fields: [id_poema], references: [id_poema], onDelete: NoAction, onUpdate: NoAction, map: "id_poema")
   usuario    usuario @relation(fields: [id_usuario], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction, map: "id_usuario")
 }
 
 model poema {
-  id_poema        BigInt       @id(map: "poema_pk") @default(autoincrement())
+  id_poema        Int          @id(map: "poema_pk")
   titulo          String?      @db.VarChar
-  privado         BigInt
+  privado         Int
   data_publicacao DateTime     @db.Timestamp(6)
   tema            String?      @db.VarChar
   texto           String       @db.VarChar

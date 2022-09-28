@@ -8,5 +8,5 @@ server.use(express.json())
 server.use(router)
 
 server.listen(port, ()=>{
-    console.log("Rodando porta 3000")
+    console.log("Rodando em :" + port)
 })
