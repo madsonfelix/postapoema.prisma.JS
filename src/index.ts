@@ -1,7 +1,7 @@
 import express from "express"
 import { router } from "./routes"
 
-const port = "variaveldeambiente" || 3000
+const port = process.env.PORT || 3000
 
 const server = express()
 server.use(express.json())
