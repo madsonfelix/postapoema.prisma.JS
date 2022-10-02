@@ -15,7 +15,7 @@ export class InteracoesController{
         return res.status(200).json({interacao})
 
     }
-    async controllerGetIdInteracoes(req: Request, res: Response){
+    async controllerSetIdInteracoes(req: Request, res: Response){
         const {tipo, comentario, id_usuario, id_poema} = req.body
 
         var data_interacao: Date = new Date()

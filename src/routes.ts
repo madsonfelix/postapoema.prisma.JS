@@ -14,6 +14,8 @@ router.get("/", (req: Request, res: Response)=>{
 
 router.get("/user/find", userController.controllerGetUser);
 
+router.get("/poem/find", poemaController.getPoema);
+
 router.post("/user/set", userController.controllerSetUser);
 
 router.post("/poem/set", poemaController.setPoema);

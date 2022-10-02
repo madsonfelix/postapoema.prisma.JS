@@ -10,6 +10,9 @@ export class PoemaController{
         if(id === null){
             return res.status(400).json({msg: "Informe id"});
         }
+        var id_poema = Number(id)
+        const poema = await poemaServices.getPoema(id_poema)
+        return res.status(200).json({poema})
     }
     async setPoema(req: Request, res: Response){
         const{titulo, privado, tema, texto, id_usuario} = req.body;
