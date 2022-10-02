@@ -1,12 +1,12 @@
 import { prismaClient } from "../database/prismaClient"
 
 interface IInteracoes{
-    id_interacao:    bigint
-    tipo:            bigint
+    id_interacao:    number
+    tipo:            number
     comentario:      string
     data_interacao:  Date
-    id_usuario:      bigint
-    id_poema:        bigint
+    id_usuario:      number
+    id_poema:        number
 }
 
 export class InteracoesServices{
@@ -22,9 +22,9 @@ export class InteracoesServices{
     async getMaxIdInteracao(){
         const maxId: any = await prismaClient.$queryRaw`select MAX(id_interacao) + 1 as maxid from interacoes`
         if(maxId[0].maxid === null){
-            return BigInt(1)
+            return Number(1)
         }
-        return BigInt(maxId[0].maxid)
+        return Number(maxId[0].maxid)
     }
     async setInteracao({id_interacao, tipo, comentario, data_interacao, id_usuario, id_poema}: IInteracoes){
         
